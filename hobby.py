@@ -1,5 +1,6 @@
 import tornado.ioloop
 import tornado.web
+import tornado.log
 
 from jinja2 import \
   Environment, PackageLoader, select_autoescape
@@ -18,15 +19,26 @@ class MainHandler(TemplateHandler):
     self.set_header(
       'Cache-Control',
       'no-store, no-cache, must-revalidate, max-age=0')
-    self.render_template("hello.html", {'name': 'World'})
+    self.render_template("index.html", {'name': 'Justin'})
+
+class Handler1(TemplateHandler):
+  def get(self,):
+    self.set_header(
+      'Cache-Control',
+      'no-store, no-cache, must-revalidate, max-age=0')
+    self.render_template("hello1.html", {'name': 'Alex'})
 
 
 def make_app():
   return tornado.web.Application([
     (r"/", MainHandler),
-  ])
+    (r"/hello1/", Handler1)
+  ], autoreload=True)
 
 if __name__ == "__main__":
+  tornado.log.enable_pretty_logging()
   app = make_app()
-  app.listen(8888,print('Server started on localhost:8888'))
+  app.listen(8888)
+  print('Server started on localhost:8888')
+  print('Press ctrl + c to stop server')
   tornado.ioloop.IOLoop.current().start()
