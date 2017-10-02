@@ -25,20 +25,23 @@ class MainHandler(TemplateHandler):
     self.set_header(
       'Cache-Control',
       'no-store, no-cache, must-revalidate, max-age=0')
-    self.render_template("base.html", {'name': 'Justin'})
+    self.render_template("index.html", {'name':'justin'})
 
-class Handler1(TemplateHandler):
-  def get(self,):
+class HobbyHandler(TemplateHandler):
+  def get(self, hobbies):
     self.set_header(
       'Cache-Control',
       'no-store, no-cache, must-revalidate, max-age=0')
-    self.render_template("hello1.html", {'name': 'Alex'})
+    self.render_template(hobbies + '.html', {})
 
 
 def make_app():
   return tornado.web.Application([
     (r"/", MainHandler),
-    (r"/hello1/", Handler1)
+    (r"/hobbies/(.*)", HobbyHandler),
+    (r"/static/(.*)",
+        tornado.web.StaticFileHandler,
+        {'path': 'static'})
   ], autoreload=True)
 
 if __name__ == "__main__":
