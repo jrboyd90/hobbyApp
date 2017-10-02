@@ -25,7 +25,7 @@ class MainHandler(TemplateHandler):
     self.set_header(
       'Cache-Control',
       'no-store, no-cache, must-revalidate, max-age=0')
-    self.render_template("index.html", {'name': 'Justin'})
+    self.render_template("base.html", {'name': 'Justin'})
 
 class Handler1(TemplateHandler):
   def get(self,):
