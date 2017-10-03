@@ -62,18 +62,18 @@ class ContactHandler(TemplateHandler):
 
       response = client.send_email(
           Destination={
-            'ToAddresses': ['jrboyd90@gmail.com'],
+            'ToAddresses': [f'jrboyd90@gmail.com'],
           },
           Message={
             'Body': {
               'Text': {
                 'Charset': 'UTF-8',
-                'Data': f"{message}",
+                'Data': f"Name: {name} /nEmail: {email} /nNumber: {mobile} /nSubject: {subject} /nMessage {message}",
               },
             },
             'Subject': {'Charset': 'UTF-8', 'Data': f'{subject}'},
           },
-          Source='jrboyd90@gmail.com',
+          Source='mailer@justinrboyd.com',
       )
       self.redirect('/hobbies/thanks')
 
