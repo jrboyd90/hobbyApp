@@ -68,7 +68,7 @@ class ContactHandler(TemplateHandler):
             'Body': {
               'Text': {
                 'Charset': 'UTF-8',
-                'Data': f"Name: {name} /nEmail: {email} /nNumber: {mobile} /nSubject: {subject} /nMessage {message}",
+                'Data': f"Name: {name} /nEmail: {email} /nNumber: {number} /nSubject: {subject} /nMessage {message}",
               },
             },
             'Subject': {'Charset': 'UTF-8', 'Data': f'{subject}'},
