@@ -59,16 +59,15 @@ class ContactHandler(TemplateHandler):
       subject = self.get_body_argument('subject')
       message = self.get_body_argument('message')
 
-
       response = client.send_email(
           Destination={
             'ToAddresses': [f'jrboyd90@gmail.com'],
           },
           Message={
             'Body': {
-              'Text': {
+              'Html': {
                 'Charset': 'UTF-8',
-                'Data': f"Name: {name} /nEmail: {email} /nNumber: {number} /nSubject: {subject} /nMessage {message}",
+                'Data': f"Name: {name}<BR/>Email: {email}<BR/>Number: {number}<BR/>Subject: {subject}<BR/>Message: {message}",
               },
             },
             'Subject': {'Charset': 'UTF-8', 'Data': f'{subject}'},
